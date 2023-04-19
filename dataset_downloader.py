@@ -2,7 +2,7 @@ import os
 
 
 def download_dataset():
-    if os.path.exists("data"):
+    if not os.path.exists("data"):
         try:
             import kaggle
         except OSError:
