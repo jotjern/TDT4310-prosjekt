@@ -45,6 +45,9 @@ def download_yahoo_stock_data():
     if os.path.exists("data/training_data.feather"):
         return
 
+    if not os.path.exists("yahoo_fin_cache"):
+        os.mkdir("yahoo_fin_cache")
+
     df = feather.read_feather("data/analyst_ratings_processed.feather")
     df["date"] = df["date"].astype("datetime64[ns]")
     stock_dfs = {}

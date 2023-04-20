@@ -60,4 +60,3 @@ if __name__ == "__main__":
             n_correct += 1
 
     print(f"Sentiment analysis F1 score: {n_correct / len(test_df)}")
-
