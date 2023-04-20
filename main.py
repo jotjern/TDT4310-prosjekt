@@ -9,6 +9,8 @@ if __name__ == "__main__":
     dataset_downloader.download_yahoo_stock_data()
 
     df = feather.read_feather("data/training_data.feather")
+    # drop empty title ""
+    df = df[(df["title"] != "") & (df["title"] != " ")]
     train_df = df[df["is_train"]]
     test_df = df[~df["is_train"]]
 
@@ -31,20 +33,12 @@ if __name__ == "__main__":
         if total > 0:
             word_weights[word] = positive / total
 
-    # print out top 10 positive and then top 10 negative words
-    print("Top 10 positive words:")
-    for word, weight in sorted(word_weights.items(), key=lambda x: x[1], reverse=True)[:10]:
-        print(f"{word}: {weight}")
-
-    print("Top 10 negative words:")
-    for word, weight in sorted(word_weights.items(), key=lambda x: x[1])[:10]:
-        print(f"{word}: {weight}")
-
     n_correct = 0
     for _, row in tqdm(test_df.iterrows(), desc="Testing bag of words model"):
         predicted_value = sum(
             word_weights.get(word) for word in row["title"].lower().split() if word in word_weights) / len(
-            row["title"].split()) > 0.5
+            row["title"].split()
+        ) > 0.5
 
         if predicted_value == row["value"]:
             n_correct += 1
