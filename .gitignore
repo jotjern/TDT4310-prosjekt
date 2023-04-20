@@ -1,4 +1,5 @@
 data/
+yahoo_fin_cache/
 
 .idea/
 .DS_Store
