@@ -58,6 +58,8 @@ def download_yahoo_stock_data():
         highest_date = highest_date + timedelta(days=1)
 
         cache_fname = os.path.join("yahoo_fin_cache", f"{stock}_{lowest_date}_{highest_date}.feather")
+        if sys.platform == "win32":
+            cache_fname = cache_fname.replace(":", "_")
 
         if not os.path.exists(cache_fname):
             try:
