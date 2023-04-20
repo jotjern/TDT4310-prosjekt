@@ -1,3 +1,4 @@
+from collections import Counter
 from datetime import timedelta
 from pyarrow import feather
 import pandas as pd
@@ -36,7 +37,6 @@ def download_kaggle_dataset():
         df["date"] = pd.to_datetime(df["date"])
         # Convert to naive datetime and remove time from date
         df["date"] = df["date"].apply(lambda x: x.replace(tzinfo=None).date())
-        df["is_train"] = np.random.choice([True, False], size=len(df), p=[0.8, 0.2])
 
         feather.write_feather(df, "data/analyst_ratings_processed.feather")
         print("Conversion complete!")
@@ -82,6 +82,7 @@ def download_yahoo_stock_data():
     df = pd.concat(stock_dfs.values())
     df["delta"] = df["close"] - df["open"]
     df["value"] = df["delta"].apply(lambda x: 1 if x > 0 else 0)
+    df["is_train"] = np.random.uniform(0, 1, len(df)) <= 0.80
 
     feather.write_feather(df, "data/training_data.feather")
 
