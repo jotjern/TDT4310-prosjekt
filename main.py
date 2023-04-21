@@ -16,7 +16,11 @@ def main():
 
     for model in models:
         model.train(train_df)
+
         f1_evaluation = model.evaluate(test_df)
+
+        print()
+
         print(f"Model {model.name} accuracy: {f1_evaluation:.2f}")
 
 
