@@ -20,8 +20,7 @@ def main():
         f1_evaluation = model.evaluate(test_df)
 
         print()
-
-        print(f"Model {model.name} accuracy: {f1_evaluation:.2f}")
+        print(f"Model {model.name} accuracy: {f1_evaluation:.2%}")
 
 
 if __name__ == "__main__":
