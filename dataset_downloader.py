@@ -86,3 +86,16 @@ def download_yahoo_stock_data():
 
     feather.write_feather(df, "data/training_data.feather")
 
+
+def load_data():
+    download_kaggle_dataset()
+    download_yahoo_stock_data()
+
+    df = feather.read_feather("data/training_data.feather")
+    # drop empty title ""
+    df = df[(df["title"] != "") & (df["title"] != " ")]
+    train_df = df[df["is_train"]]
+    test_df = df[~df["is_train"]]
+    return train_df, test_df
+
+
