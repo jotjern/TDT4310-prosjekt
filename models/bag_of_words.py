@@ -28,8 +28,9 @@ class BagOfWordsModel(PredictionModel):
             if total > 0:
                 self.word_weights[word] = positive / total
 
+    def predict_float(self, title: str) -> float:
+        weights = [self.word_weights.get(word) for word in title.lower().split() if word in self.word_weights]
+        return sum(weights) / len(weights)
+
     def predict(self, title: str) -> int:
-        return sum(
-            self.word_weights.get(word) for word in title.lower().split() if word in self.word_weights) / len(
-            title.split()
-        ) > 0.5
+        return self.predict_float(title) > 0.5
