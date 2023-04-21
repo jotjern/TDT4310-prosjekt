@@ -28,8 +28,6 @@ class BagOfWordsModel(PredictionModel):
             if total > 0:
                 self.word_weights[word] = positive / total
 
-        print()
-
     def predict(self, title: str) -> int:
         return sum(
             self.word_weights.get(word) for word in title.lower().split() if word in self.word_weights) / len(

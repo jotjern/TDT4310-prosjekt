@@ -1,3 +1,5 @@
+import sys
+
 import pandas as pd
 
 import dataset_downloader
@@ -14,7 +16,8 @@ def main():
 
     for model in models:
         model.train(train_df)
-        print(f"Model {model.name} accuracy: {model.evaluate(test_df):.2%}")
+        f1_evaluation = model.evaluate(test_df)
+        print(f"Model {model.name} accuracy: {f1_evaluation:.2f}")
 
 
 if __name__ == "__main__":
