@@ -5,13 +5,14 @@ import pandas as pd
 import dataset_downloader
 from tqdm import tqdm
 
-from models import BagOfWordsModel, SentimentAnalysisModel, PredictionModel, LogisticRegression
+from models import BagOfWordsModel, SentimentAnalysisModel, PredictionModel, LogisticRegression, NaïveBayes, BertPredictionModel
+import data_analysis
 
 
 def main():
     print("Loading data...")
     train_df, test_df = dataset_downloader.load_data()
-    print(train_df)
+    train_df = train_df.sample(frac=0.01)
 
     models = [LogisticRegression()]
 
