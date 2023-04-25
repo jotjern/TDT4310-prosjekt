@@ -1,1 +1,0 @@
-count_vectorizer.fit_transform(titles)

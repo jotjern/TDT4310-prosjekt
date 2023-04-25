@@ -1,13 +1,9 @@
 import nltk
 from nltk.corpus import wordnet as wn
 from nltk.corpus import sentiwordnet as swn
-from nltk.tokenize import word_tokenize, sent_tokenize
+from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
-from tqdm import tqdm
-
-from nltk.sentiment import SentimentIntensityAnalyzer
-
 
 from .prediction_model import PredictionModel
 
