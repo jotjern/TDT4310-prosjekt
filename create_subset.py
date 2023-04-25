@@ -9,7 +9,7 @@ test_subset = test.sample(100, random_state=42)
 
 # write to Excel file, one with value and one without
 
-openai.api_key = "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"
+openai.api_key = ""
 
 for i, row in test_subset.iterrows():
     prompt = f"Analyst rating for {row['stock']} on {row['date'].strftime('%Y-%m-%d')}"
