@@ -1,7 +1,7 @@
 import nltk
 from nltk.corpus import wordnet as wn
 from nltk.corpus import sentiwordnet as swn
-from nltk.tokenize import word_tokenize, sent_tokenize
+from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
 
@@ -48,9 +48,11 @@ def sentiment_analysis(sentence):
     sentiment_score = sentiment / tokens_count
     return sentiment_score
 
-
 class SentimentAnalysisModel(PredictionModel):
     name = "Sentiment analysis"
 
     def predict(self, title: str) -> int:
         return sentiment_analysis(title) > 0
+
+    
+    

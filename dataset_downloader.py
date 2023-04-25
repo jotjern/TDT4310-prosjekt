@@ -98,4 +98,8 @@ def load_data():
     test_df = df[~df["is_train"]]
     return train_df, test_df
 
+def load_data_one_array():
+    download_kaggle_dataset()
+    download_yahoo_stock_data()
 
+    return feather.read_feather("data/training_data.feather")
