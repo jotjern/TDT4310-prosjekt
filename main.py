@@ -1,6 +1,8 @@
+from sklearn.naive_bayes import BernoulliNB
+
 import dataset_downloader
 
-from models import BagOfWordsModel, SentimentAnalysisModel, LogisticRegression, NaïveBayes
+from models import SentimentAnalysisModel, LogisticRegression, NaïveBayes
 
 
 def get_accuracy(tp, tn, fp, fn):
@@ -17,7 +19,7 @@ def main():
     print("Loading data...")
     train_df, test_df = dataset_downloader.load_data()
 
-    models = [LogisticRegression(), NaïveBayes(), BagOfWordsModel(), SentimentAnalysisModel()]
+    models = [NaïveBayes(model=BernoulliNB), LogisticRegression(), SentimentAnalysisModel()]
 
     for model in models:
         print(f"Training {model.name} model...")

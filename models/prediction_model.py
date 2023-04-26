@@ -18,8 +18,11 @@ class PredictionModel:
     def train(self, train_df):
         pass
 
-    def predict(self, title: str) -> int:
+    def predict_float(self, title: str) -> float:
         pass
+
+    def predict(self, title: str) -> int:
+        return self.predict_float(title) > 0.5
 
     def predict_all(self, titles: List[str]) -> Iterable[int]:
         return (self.predict(title) for title in titles)
