@@ -1,9 +1,11 @@
-import nltk
 from nltk.corpus import wordnet as wn
 from nltk.corpus import sentiwordnet as swn
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus.reader.wordnet import NOUN, VERB, ADJ, ADV
+
+import random
+import nltk
 
 from .prediction_model import PredictionModel
 
@@ -52,7 +54,12 @@ class SentimentAnalysisModel(PredictionModel):
     name = "Sentiment analysis"
 
     def predict(self, title: str) -> int:
-        return sentiment_analysis(title) > 0
+        sentiment = sentiment_analysis(title)
+        if sentiment > 0:
+            return 1
+        elif sentiment < 0:
+            return 0
+        else:
+            return random.Random(hash(title)).randint(0, 1)
 
-    
     
